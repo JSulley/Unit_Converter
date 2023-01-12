@@ -5,10 +5,13 @@ public class Main {
     private final double MILEPERFURLONG = 0.125;
     public static void main(String[] args) {
         displayOptions();
-        String chosenUnits = getUnits();
-        validateInput(chosenUnits);
+        Scanner scanner = new Scanner(System.in);
 
-        double distance = getDistance(chosenUnits);
+        String chosenUnits = getUnits(scanner);
+        validateInput(chosenUnits, scanner);
+
+        double distance = getDistance(chosenUnits, scanner);
+        scanner.close();
     }
     public static void displayOptions() {
         System.out.println("Enter one of the following units to convert the distance to:");
@@ -16,12 +19,10 @@ public class Main {
         System.out.println("miles");
         System.out.println("furlongs");
     }
-    public static String getUnits() {
-        // Get units from the user
-        Scanner scanner = new Scanner(System.in);
+    public static String getUnits(Scanner scanner) {
         return scanner.next();
     }
-    public static void validateInput(String option) {
+    public static void validateInput(String option, Scanner scanner) {
         option = option.toLowerCase();
         boolean isInputValid = false;
 
@@ -38,14 +39,13 @@ public class Main {
                     break;
                 default:
                     System.out.println("Please enter either \\'yards\\', \\'miles\\', or \\'furlongs\\'");
-                    Scanner scanner = new Scanner(System.in);
                     option = scanner.next();
             }
         }
     }
-    public static double getDistance(String units) {
+    public static double getDistance(String units, Scanner scanner) {
         System.out.printf("Enter the distance you want to convert to %s%n", units);
-        Scanner scanner = new Scanner(System.in);
         return scanner.nextDouble();
     }
+
 }
