@@ -8,7 +8,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         String chosenUnits = getUnits(scanner);
-        validateInput(chosenUnits, scanner);
+        chosenUnits = validateInput(chosenUnits, scanner);
 
         double distance = getDistance(chosenUnits, scanner);
         scanner.close();
@@ -22,7 +22,7 @@ public class Main {
     public static String getUnits(Scanner scanner) {
         return scanner.next();
     }
-    public static void validateInput(String option, Scanner scanner) {
+    public static String validateInput(String option, Scanner scanner) {
         option = option.toLowerCase();
         boolean isInputValid = false;
 
@@ -34,14 +34,16 @@ public class Main {
                 case "miles":
                     isInputValid = true;
                     break;
-                case "furlough":
+                case "furlongs":
                     isInputValid = true;
                     break;
                 default:
-                    System.out.println("Please enter either \\'yards\\', \\'miles\\', or \\'furlongs\\'");
+                    System.out.println("Please enter either 'yards', 'miles', or 'furlongs'");
                     option = scanner.next();
             }
         }
+
+        return option;
     }
     public static double getDistance(String units, Scanner scanner) {
         System.out.printf("Enter the distance you want to convert to %s%n", units);
